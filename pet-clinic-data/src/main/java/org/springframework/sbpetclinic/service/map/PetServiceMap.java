@@ -3,9 +3,9 @@ package org.springframework.sbpetclinic.service.map;
 import java.util.Set;
 
 import org.springframework.sbpetclinic.model.Pet;
-import org.springframework.sbpetclinic.service.CrudService;
+import org.springframework.sbpetclinic.service.PetService;
 
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements CrudService<Pet, Long> {
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
 
 	@Override
 	public Pet findById(Long id) {
