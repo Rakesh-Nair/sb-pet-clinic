@@ -20,48 +20,41 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class DataLoader implements CommandLineRunner {
-	
+
 	public final OwnerService ownerService;
 	public final VetService vetService;
-	
+
 	public DataLoader(OwnerService ownerService, VetService vetService) {
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 	}
 
-
-
-
 	@Override
 	public void run(String... args) throws Exception {
-		Owner owner1= new Owner();
-		owner1.setId(1L);
+		Owner owner1 = new Owner();
 		owner1.setFirstName("Sanji");
 		owner1.setLastName("Vinsmoke");
-		
+
 		ownerService.save(owner1);
-		
-		Owner owner2= new Owner();
-		owner2.setId(2L);
+
+		Owner owner2 = new Owner();
 		owner2.setFirstName("Roronoa");
 		owner2.setLastName("Zoro");
-		
+
 		ownerService.save(owner2);
-		
-		Vet vet1= new Vet();
-		vet1.setId(1L);
+
+		Vet vet1 = new Vet();
 		vet1.setFirstName("Tony Tony");
 		vet1.setLastName("Chopper");
-		
+
 		vetService.save(vet1);
-		
-		Vet vet2= new Vet();
-		vet2.setId(2L);
+
+		Vet vet2 = new Vet();
 		vet2.setFirstName("Reiju");
 		vet2.setLastName("Vinsmoke");
-		
+
 		vetService.save(vet2);
-		
+
 	}
 
 }
