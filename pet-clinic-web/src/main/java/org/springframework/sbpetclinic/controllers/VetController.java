@@ -8,15 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class VetController {
 	public VetService vetService;
-	
-	
+
 	public VetController(VetService vetService) {
 		super();
 		this.vetService = vetService;
 	}
 
-
-	@RequestMapping({"/vets","/vets/index","/vets/index.html"})
+	@RequestMapping({ "/vets", "/vets/index", "/vets/index.html", "/vets.html" })
 	public String listVets(Model model) {
 		model.addAttribute("vets", this.vetService.findAll());
 		return "vets/index";
