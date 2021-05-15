@@ -5,4 +5,5 @@ import org.springframework.sbpetclinic.model.Owner;
 
 public interface OwnerRepository extends CrudRepository<Owner, Long> {
 
+	public Owner findByLastName(String lastName);
 }
