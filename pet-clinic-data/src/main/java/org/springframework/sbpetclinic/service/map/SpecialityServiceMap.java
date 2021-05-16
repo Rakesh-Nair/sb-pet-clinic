@@ -2,12 +2,13 @@ package org.springframework.sbpetclinic.service.map;
 
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.sbpetclinic.model.Speciality;
-import org.springframework.sbpetclinic.model.Vet;
 import org.springframework.sbpetclinic.service.SpecialityService;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile({ "default", "map" })
 public class SpecialityServiceMap extends AbstractMapService<Speciality, Long> implements SpecialityService {
 
 	@Override
@@ -29,13 +30,13 @@ public class SpecialityServiceMap extends AbstractMapService<Speciality, Long> i
 	}
 
 	@Override
-	public void delete(Speciality t){
+	public void delete(Speciality t) {
 		super.delete(t);
 	}
-	
+
 	@Override
-	public void deleteById(Long id){
-		 super.deleteById(id);
+	public void deleteById(Long id) {
+		super.deleteById(id);
 	}
 
 }

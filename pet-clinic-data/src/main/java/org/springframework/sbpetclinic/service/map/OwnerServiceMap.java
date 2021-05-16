@@ -2,6 +2,7 @@ package org.springframework.sbpetclinic.service.map;
 
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.sbpetclinic.model.Owner;
 import org.springframework.sbpetclinic.model.Pet;
 import org.springframework.sbpetclinic.service.OwnerService;
@@ -10,6 +11,7 @@ import org.springframework.sbpetclinic.service.PetTypeService;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile({ "default", "map" })
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
 	private final PetTypeService petTypeService;
@@ -24,18 +26,17 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 	@Override
 	public Owner save(Owner t) {
 		if (t != null) {
-			if(t.getPets() != null) {
+			if (t.getPets() != null) {
 				t.getPets().forEach(p -> {
-					if(p.getPetType() != null) {
-						if(p.getPetType().getId() == null) {
+					if (p.getPetType() != null) {
+						if (p.getPetType().getId() == null) {
 							p.setPetType(petTypeService.save(p.getPetType()));
 						}
-					}
-					else {
+					} else {
 						throw new RuntimeException("Pet Type is Required");
 					}
-					
-					if(p.getId() == null) {
+
+					if (p.getId() == null) {
 						Pet savedPet = petService.save(p);
 						p.setId(savedPet.getId());
 					}

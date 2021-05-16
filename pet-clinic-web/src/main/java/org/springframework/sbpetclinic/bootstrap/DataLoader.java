@@ -3,9 +3,7 @@
  */
 package org.springframework.sbpetclinic.bootstrap;
 
-import java.lang.reflect.Constructor;
 import java.time.LocalDate;
-import java.util.Date;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.sbpetclinic.model.Owner;
@@ -13,12 +11,12 @@ import org.springframework.sbpetclinic.model.Pet;
 import org.springframework.sbpetclinic.model.PetType;
 import org.springframework.sbpetclinic.model.Speciality;
 import org.springframework.sbpetclinic.model.Vet;
+import org.springframework.sbpetclinic.model.Visit;
 import org.springframework.sbpetclinic.service.OwnerService;
 import org.springframework.sbpetclinic.service.PetTypeService;
 import org.springframework.sbpetclinic.service.SpecialityService;
 import org.springframework.sbpetclinic.service.VetService;
-import org.springframework.sbpetclinic.service.map.OwnerServiceMap;
-import org.springframework.sbpetclinic.service.map.VetServiceMap;
+import org.springframework.sbpetclinic.service.VisitService;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,20 +30,22 @@ public class DataLoader implements CommandLineRunner {
 	public final VetService vetService;
 	public final PetTypeService petTypeService;
 	public final SpecialityService specialityService;
+	public final VisitService visitService;
 
 	public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-			SpecialityService specialityService) {
+			SpecialityService specialityService, VisitService visitService) {
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petTypeService = petTypeService;
 		this.specialityService = specialityService;
+		this.visitService = visitService;
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+
 		int count = petTypeService.findAll().size();
-		if(count == 0) {
+		if (count == 0) {
 			loadData();
 		}
 	}
@@ -54,30 +54,30 @@ public class DataLoader implements CommandLineRunner {
 		PetType dog = new PetType();
 		dog.setName("Dog");
 		PetType savedDogPetType = petTypeService.save(dog);
-		
+
 		PetType cat = new PetType();
 		dog.setName("Cat");
 		PetType savedCatPetType = petTypeService.save(cat);
-		
+
 		Speciality radiology = new Speciality();
 		radiology.setDescription("Radiology");
 		Speciality savedRadiology = specialityService.save(radiology);
-		
+
 		Speciality surgery = new Speciality();
 		surgery.setDescription("Surgery");
 		Speciality savedSurgery = specialityService.save(surgery);
-		
+
 		Speciality dentistry = new Speciality();
 		dentistry.setDescription("Dentistry");
 		Speciality savedDentistry = specialityService.save(dentistry);
-		
+
 		Owner owner1 = new Owner();
 		owner1.setFirstName("Sanji");
 		owner1.setLastName("Vinsmoke");
 		owner1.setAddress("202 Ramleela");
 		owner1.setCity("Kalyan");
 		owner1.setTelephone("9388492232");
-		
+
 		Pet sanjiPet = new Pet();
 		sanjiPet.setPetType(savedDogPetType);
 		sanjiPet.setOwner(owner1);
@@ -99,6 +99,12 @@ public class DataLoader implements CommandLineRunner {
 		zoroPet.setName("Niji");
 		owner2.getPets().add(zoroPet);
 		ownerService.save(owner2);
+
+		Visit catVisit = new Visit();
+		catVisit.setDate(LocalDate.now());
+		catVisit.setPet(zoroPet);
+		catVisit.setDescription("Pirate Hunter");
+		visitService.save(catVisit);
 
 		Vet vet1 = new Vet();
 		vet1.setFirstName("Tony Tony");
