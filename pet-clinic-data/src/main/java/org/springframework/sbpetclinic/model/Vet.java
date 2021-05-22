@@ -10,25 +10,21 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "vets")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Vet extends Person {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "vet_specialities", joinColumns = @JoinColumn(name = "vet_id"), inverseJoinColumns = @JoinColumn(name = "speciality_id"))
 	private Set<Speciality> specialities = new HashSet<Speciality>();
-
-	/**
-	 * @return the specialities
-	 */
-	public Set<Speciality> getSpecialities() {
-		return specialities;
-	}
-
-	/**
-	 * @param specialities the specialities to set
-	 */
-	public void setSpecialities(Set<Speciality> specialities) {
-		this.specialities = specialities;
-	}
-
 }
