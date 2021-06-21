@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.Setter;
 @Table(name = "types")
 @Setter
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class PetType extends BaseEntity {
 
